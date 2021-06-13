@@ -9,12 +9,11 @@
 </div>
 {% endif %}
   {% for seat in seat_list %}
-
   <div class="card" style="width: 10rem;">
     <ul class="list-group list-group-flush">
       <div class="card-body">
         <div class="card-title">
-          座位編號:  
+          座位編號:&nbsp
           <a href="{% url 'seat_view' seat.id %}">{{ seat.SerialNumber }}</a>
         </div>
       </div>
