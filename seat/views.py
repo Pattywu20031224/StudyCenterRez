@@ -8,7 +8,6 @@ from log.models import Log
 # Create your views here.
 class SeatList(LoginRequiredMixin, ListView):   
     model = Seat    
-    paginate_by = 20
 
 class SeatView(LoginRequiredMixin, DetailView):
     model = Seat
