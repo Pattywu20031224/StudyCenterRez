@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="mb-1">
+  <a href="{% url 'seat_add' %}" class="btn btn-sm btn-primary">
+    <i class="fas fa-plus">新增座位</i> 
+  </a>
+</div>
+{% endif %}
+<div id="seat-list" class="card-group">
+  {% for seat in seat_list %}
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="card-title">
+        <a href="{% url 'seat_view' seat.id %}">{{ seat.SerialNumber }}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% include "pagination.html" %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-2">
+  <a href="{% url 'seat_edit' seat.id %}" class="btn btn-sm btn-primary">
+    <i class="fas fa-edit"></i> 修改
+  </a>
+  <a href="{% url 'seat_delete' seat.id %}" class="btn btn-sm btn-danger">
+    <i class="fas fa-trash"></i> 刪除
+  </a>
+</div>
+<div id="seat-detail" class="row">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">{{ seat.SerialNumber }}</div>
+      <table class="table">
+        <tr>
+          <th>座位編號</th><td>{{ seat.SerialNumber }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        劃位紀錄
+      </div>
+      <ul class="list-group">
+        {% for log in log_list %}
+        <li class="list-group-item d-flex justify-content-between">
+          <div>
+            <span class="badge">
+            {{ log.checkout|date:"Y/m/d H:i" }}
+            <i class="fas fa-arrow-alt-circle-right"></i>
+            </span>
+            {% if log.returned %}
+              <span class="badge">
+                {{ log.returned|date:"Y/m/d H:i" }}
+              </span>
+            {% else %}
+              <span class="badge badge-warning">借用中</span>
+            {% endif %}
+          </div>
+          <div>
+            <a href="{% url 'borrower_view' log.borrower.id %}">
+              {{ log.borrower.realname }}
+            </a>
+          </div>
+        </li>
+        {% empty %}
+        <li class="list-group-item">無</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %}
