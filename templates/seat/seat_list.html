@@ -16,6 +16,12 @@
           座位編號:&nbsp
           <a href="{% url 'seat_view' seat.id %}">{{ seat.SerialNumber }}</a>
         </div>
+        {% if user.is_superuser %}
+        {% else %}
+        <a href="{% url 'log_list' %}" class="btn btn-sm btn-primary">
+          <i class="fas fa-address-seat"></i> 預約此座位
+        </a>
+        {% endif %}
       </div>
     </ul>
   </div>

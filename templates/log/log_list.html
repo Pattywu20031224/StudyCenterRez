@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="mb-1">
-  <a href="{% url 'checkout_user' %}" class="btn btn-sm btn-primary">
-    <i class="fas fa-address-seat"></i> 預約座位
-  </a>
-</div>
+
 <div id="log-list">
   <table class="table table-sm">
     <thead>
@@ -14,6 +10,7 @@
         <th>座位編號</th>
         <th>預約人</th>
         <th>簽到時間</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +28,9 @@
           </a>
         </td>
         <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
+        <td><a href="{% url '' seat.id %}" class="btn btn-sm btn-danger">
+          <i class="fas fa-trash"></i> 刪除
+        </a></td>
       </tr>
       {% endfor %}
     </tbody>

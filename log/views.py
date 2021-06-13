@@ -22,10 +22,10 @@ class CheckoutUser(LoginRequiredMixin, ListView):
     def get_queryset(self):
         query = self.request.GET.get('query')
         if query:
-            users = User.objects.filter(realname__icontains=query)
+            users = User.objects.filter(username__icontains=query)
         else:
             users = User.objects
-        return users.order_by('realname')
+        return users.order_by('username')
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)

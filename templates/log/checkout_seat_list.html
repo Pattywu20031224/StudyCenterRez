@@ -3,7 +3,7 @@
 {% block content %}
 <div class="card">
   <div class="card-header">
-    <a href="{% url 'user_view' user.id %}">{{ user.realname }}</a>
+    <a href="{% url 'user_view' user.id %}">{{ user.username }}</a>
     已被預約的座位
   </div>
   <div class="card-body">

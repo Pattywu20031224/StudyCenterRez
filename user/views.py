@@ -65,7 +65,7 @@ class UserEdit(SuperuserRequiredMixin, UpdateView):
         form = super().get_form()
         form.fields['first_name'].label = '真實姓名'
         form.fields['first_name'].required = True
-        form.fields['last_name'].label = '學校名稱'
+        form.fields['last_name'].label = '班級'
         form.fields['last_name'].required = True
         return form
 class UserPasswordUpdate(SuperuserRequiredMixin, UpdateView):
