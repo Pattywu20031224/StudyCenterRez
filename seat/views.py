@@ -8,15 +8,12 @@ from log.models import Log
 # Create your views here.
 class SeatList(LoginRequiredMixin, ListView):   
     model = Seat    
-    paginate_by = 10
+    paginate_by = 20
 
 class SeatView(LoginRequiredMixin, DetailView):
     model = Seat
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['log_list'] = Log.objects.filter(
-            equip=self.object, 
-        ).order_by('-id').select_related('user')
         return ctx
 class SeatAdd(LoginRequiredMixin, CreateView):  
     model = Seat

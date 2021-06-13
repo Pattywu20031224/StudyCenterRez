@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+      <form action=""  method="get">
+        <div class="form-inline form-group">
+          <label>篩選座位：</label>
+          <input type="text" name="query" class="form-control" placeholder="請輸入關鍵字..." value="{{ query }}" />
+          <input type="submit" class="form-control btn btn-primary" value="篩選"/>
+        </div>  
+      </form>
+    </div>
+    <div id="log-list" class="card-body">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>預約時間</th>
+            <th>座位編號</th>
+            <th>預約人</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in log_list %}
+          <tr>
+            <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
+            <td>
+              <a href="{% url 'seat_view' log.seat.id %}">
+                {{ log.seat.SerialNumber }}
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'user_view' log.user.id %}">
+                {{ log.user.realname }}
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'return_log' log.id %}" class="btn btn-sm btn-primary">
+                <i class="fas fa-undo"></i> 歸還
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      {% include "pagination.html" %}
+    </div>
+  </div>{% endblock %}

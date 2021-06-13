@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('user.urls')),
     path('seat', include('seat.urls')),
+    path('log/',include('log.urls')),
    ]
 
 # 加入靜態檔案的處理規則
