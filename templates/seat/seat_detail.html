@@ -22,37 +22,6 @@
         </tr>
       </table>
     </div>
-    <div class="card">
-      <div class="card-header">
-        劃位紀錄
-      </div>
-      <ul class="list-group">
-        {% for log in log_list %}
-        <li class="list-group-item d-flex justify-content-between">
-          <div>
-            <span class="badge">
-            {{ log.checkout|date:"Y/m/d H:i" }}
-            <i class="fas fa-arrow-alt-circle-right"></i>
-            </span>
-            {% if log.returned %}
-              <span class="badge">
-                {{ log.returned|date:"Y/m/d H:i" }}
-              </span>
-            {% else %}
-              <span class="badge badge-warning">借用中</span>
-            {% endif %}
-          </div>
-          <div>
-            <a href="{% url 'borrower_view' log.borrower.id %}">
-              {{ log.borrower.realname }}
-            </a>
-          </div>
-        </li>
-        {% empty %}
-        <li class="list-group-item">無</li>
-        {% endfor %}
-      </ul>
-    </div>
   </div>
   </div>
 </div>

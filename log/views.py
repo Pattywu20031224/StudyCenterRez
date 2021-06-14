@@ -90,7 +90,8 @@ class ReturnLog(LoginRequiredMixin, RedirectView):
         log = Log.objects.get(id=self.kwargs['lid'])
         log.returned = datetime.now()
         log.save()
-        return reverse('return_seat')
+        return reverse('log_list')
+
 class LogDelete(LoginRequiredMixin, DeleteView):
     model = Log
     template_name = 'confirm_delete.html'
