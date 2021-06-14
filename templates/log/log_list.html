@@ -6,9 +6,10 @@
   <table class="table table-sm">
     <thead>
       <tr>
-        <th>預約時間</th>
+        <th>預約日期</th>
         <th>座位編號</th>
         <th>預約人</th>
+        <th>登計時間</th>
         <th>簽到時間</th>
         <th>操作</th>
       </tr>
@@ -16,7 +17,7 @@
     <tbody>
       {% for log in log_list %}
       <tr>
-        <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
+        <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
         <td>
           <a href="{% url 'seat_view' log.seat.id %}">
             {{ log.seat.SerialNumber }}
@@ -27,6 +28,7 @@
             {{ log.user.first_name }}
           </a>
         </td>
+        <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
         <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
         <td><a href="" class="btn btn-sm btn-danger">
           <i class="fas fa-trash"></i> 刪除</a>

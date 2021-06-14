@@ -8,8 +8,21 @@
   </a>
 </div>
 {% endif %}
+{{ qdate }}
+<form action="" method="post" class="p-3">
+  {% csrf_token %}
+  <label for="rdate">預約日期</label>
+  <select name="rdate" id="rdate" class="form-select ">
+    {% for option in option_list %}
+    <option value="{{ option.year }}-{{ option.month|stringformat:'02d' }}-{{ option.day|stringformat:'02d' }}" {% if option == qdate %}selected{% endif %}>
+      {{ option.year }}-{{ option.month|stringformat:'02d' }}-{{ option.day|stringformat:'02d' }}
+    </option>
+    {% endfor %}
+  </select>
+</form>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6">
   {% for seat in seat_list %}
-  <div class="card" style="width: 10rem;">
+  <div class="card col">
     <ul class="list-group list-group-flush">
       <div class="card-body">
         <div class="card-title">
@@ -18,16 +31,27 @@
         </div>
         {% if user.is_superuser %}
         {% else %}
-        <a href="{% url 'seat_reserve' seat.id %}" class="btn btn-sm btn-primary">
-          <i class="fas fa-address-seat"></i> 預約此座位
-        </a>
+          {% if seat.user %}
+            {{ seat.user }}            
+          {% else %}
+            <a href="{% url 'seat_reserve' seat.id %}?d={{ qdate|date:'Y-m-d' }}" class="btn btn-sm btn-primary">
+              <i class="fas fa-address-seat"></i> 預約此座位
+            </a>
+          {% endif %}
         {% endif %}
       </div>
     </ul>
   </div>
-
-
   {% endfor %}
 </div>
 {% include "pagination.html" %}
+
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+$('#rdate').change(function(e) {
+  e.target.form.submit();
+});
+</script>
 {% endblock %}

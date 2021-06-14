@@ -10,7 +10,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html', extra_context={'title':'歡迎光臨'}), name='home'),
     path('user/', include('django.contrib.auth.urls')),
     path('user/', include('user.urls')),
-    path('seat', include('seat.urls')),
+    path('seat/', include('seat.urls')),
     path('log/',include('log.urls')),
    ]
 
