@@ -14,7 +14,7 @@
   <div id="user-list" class="card-body">
     {% for user in user_list %}
     <a href="{% url 'checkout_seat' user.id %}" class="btn btn-warning">
-      {{ user.username }}
+      {{ User.username }}
     </a>
     {% endfor %}
   </div>

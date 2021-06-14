@@ -18,7 +18,7 @@
         </div>
         {% if user.is_superuser %}
         {% else %}
-        <a href="{% url 'log_list' %}" class="btn btn-sm btn-primary">
+        <a href="{% url 'seat_reserve' seat.id %}" class="btn btn-sm btn-primary">
           <i class="fas fa-address-seat"></i> 預約此座位
         </a>
         {% endif %}

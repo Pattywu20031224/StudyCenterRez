@@ -24,13 +24,13 @@
         </td>
         <td>
           <a href="{% url 'user_view' log.user.id %}">
-            {{ log.user.realname }}
+            {{ log.user.first_name }}
           </a>
         </td>
         <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
-        <td><a href="{% url '' seat.id %}" class="btn btn-sm btn-danger">
-          <i class="fas fa-trash"></i> 刪除
-        </a></td>
+        <td><a href="" class="btn btn-sm btn-danger">
+          <i class="fas fa-trash"></i> 刪除</a>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

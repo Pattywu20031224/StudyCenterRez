@@ -8,6 +8,7 @@ from log.models import Log
 # Create your views here.
 class SeatList(LoginRequiredMixin, ListView):   
     model = Seat    
+    
 
 class SeatView(LoginRequiredMixin, DetailView):
     model = Seat
@@ -30,3 +31,10 @@ class EquipDelete(LoginRequiredMixin, DeleteView):
     model = Seat
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy('seat_list')
+class SeatReserve(LoginRequiredMixin,RedirectView):
+    def get_redirect_url(self, *args, **kwargs) :
+        Log(
+            user=self.request.user,
+            seat=Seat.objects.get(id=self.kwargs['pk']),
+        ).save()
+        return reverse('log_list')

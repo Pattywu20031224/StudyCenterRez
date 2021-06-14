@@ -2,4 +2,16 @@
 
 {% block content %}
 <p>歡迎光臨K中劃位系統！</p>
+
+{% if user.is_authenticated %}
+{% if user.is_superuser %} 
+<p>老師</p>
+{% else %}
+<p>學生</p>
+{% endif %}
+
+{% endif %}
+
+<img src="media/座位表.png" alt="" >
+
 {% endblock %}
