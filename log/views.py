@@ -1,4 +1,4 @@
-from django.urls import reverse
+from django.urls import reverse,reverse_lazy
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
@@ -91,3 +91,7 @@ class ReturnLog(LoginRequiredMixin, RedirectView):
         log.returned = datetime.now()
         log.save()
         return reverse('return_seat')
+class LogDelete(LoginRequiredMixin, DeleteView):
+    model = Log
+    template_name = 'confirm_delete.html'
+    success_url = reverse_lazy('log_list')

@@ -16,6 +16,6 @@ class Log(Model):
     def __str__(self):
         return "{} | {} | {}".format(
             self.checkout, 
-            self.user.realname, 
+            self.user.first_name, 
             self.seat.SerialNumber
         )
