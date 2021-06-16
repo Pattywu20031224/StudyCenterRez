@@ -12,6 +12,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('seat/', include('seat.urls')),
     path('log/',include('log.urls')),
+    path('developer', TemplateView.as_view(template_name='developer.html'))
    ]
 
 # 加入靜態檔案的處理規則
