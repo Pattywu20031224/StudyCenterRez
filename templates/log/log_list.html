@@ -15,46 +15,98 @@
       </tr>
     </thead>
     <tbody>
+      
       {% for log in log_list %}
-      <tr>
-        <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
-        <td>
-          <a href="{% url 'seat_view' log.seat.id %}">
-            {{ log.seat.SerialNumber }}
-          </a>
-        </td>
-        <td>
-          <a href="{% url 'user_view' log.user.id %}">
-            {{ log.user.first_name }}
-          </a>
-        </td>
-        <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
-        <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
         {% if user.is_superuser %} 
-        {% if  log.returned|date:"Y/m/d H:i"  %}
-        <td><a href="" class="btn btn-sm btn-danger">
-          <i class="fas fa-user-check"></i> 已簽到</a>
-        </td>
-        {% else %}
-        <td><a href="{% url 'return_log' log.id %}" class="btn btn-sm btn-danger">
-          <i class="fas fa-user-check"></i> 簽到</a>
-        </td>
-        {% endif %}
-        {% else %}
-        {% if  log.returned|date:"Y/m/d H:i"  %}
-        <td><a href="" class="btn btn-sm btn-danger">
-          <i class="fas fa-trash"></i>刪除</a>
-        </td>
-        {% else %}
-        <td><a href="{% url 'log_delete' log.id %}" class="btn btn-sm btn-danger">
-          <i class="fas fa-trash"></i> 刪除</a>
-        </td>
-        {% endif %}
-        {% endif %}
-      </tr>
+          {% if log.reserve_date|date:"Y/m/d" == qdate %}
+          <tr>
+            <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
+            <td>
+              <a href="{% url 'seat_view' log.seat.id %}">
+                {{ log.seat.SerialNumber }}
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'user_view' log.user.id %}">
+                {{ log.user.first_name }}
+              </a>
+            </td>
+            <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
+            <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
+            {% if user.is_superuser %} 
+            {% if  log.returned|date:"Y/m/d H:i"  %}
+            <td><a href="" class="btn btn-sm btn-danger">
+              <i class="fas fa-user-check"></i> 已簽到</a>
+            </td>
+            {% else %}
+            <td><a href="{% url 'return_log' log.id %}" class="btn btn-sm btn-danger">
+              <i class="fas fa-user-check"></i> 簽到</a>
+            </td>
+            {% endif %}
+            {% else %}
+            {% if  log.returned|date:"Y/m/d H:i"  %}
+            <td><a href="" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash"></i>刪除</a>
+            </td>
+            {% else %}
+            <td><a href="{% url 'log_delete' log.id %}" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash"></i> 刪除</a>
+            </td>
+            {% endif %}
+            {% endif %}
+          </tr>
+          {% endif %}
+          {% else %}
+            <tr>
+              <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
+              <td>
+                <a href="{% url 'seat_view' log.seat.id %}">
+                  {{ log.seat.SerialNumber }}
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'user_view' log.user.id %}">
+                  {{ log.user.first_name }}
+                </a>
+              </td>
+              <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
+              <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
+              {% if user.is_superuser %} 
+              {% if  log.returned|date:"Y/m/d H:i"  %}
+              <td><a href="" class="btn btn-sm btn-danger">
+                <i class="fas fa-user-check"></i> 已簽到</a>
+              </td>
+              {% else %}
+              <td><a href="{% url 'return_log' log.id %}" class="btn btn-sm btn-danger">
+                <i class="fas fa-user-check"></i> 簽到</a>
+              </td>
+              {% endif %}
+              {% else %}
+              {% if  log.returned|date:"Y/m/d H:i"  %}
+              <td><a href="" class="btn btn-sm btn-danger">
+                <i class="fas fa-trash"></i>刪除</a>
+              </td>
+              {% else %}
+              <td><a href="{% url 'log_delete' log.id %}" class="btn btn-sm btn-danger">
+                <i class="fas fa-trash"></i> 刪除</a>
+              </td>
+              {% endif %}
+              {% endif %}
+            </tr>
+            {% endif %}
       {% endfor %}
+      
+
     </tbody>
   </table>
 </div>
 {% include "pagination.html" %}
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+$('#rdate').change(function(e) {
+  e.target.form.submit();
+});
+</script>
 {% endblock %}

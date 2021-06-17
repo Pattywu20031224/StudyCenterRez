@@ -1,10 +1,14 @@
+from django.db.models.expressions import OuterRef, Subquery
 from django.urls import reverse,reverse_lazy
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin
-from datetime import datetime
+from datetime import date, datetime
 from django.contrib.auth.models import User, Group
+from django.views.generic.dates import DateMixin
 from seat.models import Seat
 from .models import Log
+from django.utils import timezone
+from datetime import timedelta, datetime
 
 
 # 借閱記錄列表
@@ -12,6 +16,21 @@ class LogList(LoginRequiredMixin, ListView):
     model = Log
     ordering = ['-checkout']
     paginate_by = 20
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        delta = timedelta(days=1)
+        today = timezone.localdate()
+        options = []
+        for i in range(7):
+            today += delta
+            options.append(today)
+        ctx['option_list'] = options
+        ctx['qdate'] = date.today
+        return ctx
+    
 
 
 class CheckoutUser(LoginRequiredMixin, ListView):
