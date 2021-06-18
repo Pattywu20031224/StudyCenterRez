@@ -6,6 +6,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q, Subquery
 from django import forms
 from .models import *
+from .models import Log
+
 
 # 限定管理員才允許操作的混成類別
 class SuperuserRequiredMixin(AccessMixin):
