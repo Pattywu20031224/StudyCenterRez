@@ -3,6 +3,18 @@
 {% block content %}
 <p>歡迎光臨K中劃位系統！</p>
 
+{% if user.is_authenticated %}
+{% else %}
+
+<p>請先<a href="{% url 'login' %}">登入</a>以進行更多操作 <br>
+    各班導師帳號: cteacher+班級 <br>
+    K中值班老師帳號: kteacher <br>
+    學生帳號: student+班級座號 <br>
+    教務處教學組組長帳號: scoc <br><br>
+</p>
+
+
+{% endif %}
 {% if "kteacher" in user.username %}
 <p>you are k staff</p>
 {% elif "cteacher" in user.username %}

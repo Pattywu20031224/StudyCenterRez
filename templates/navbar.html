@@ -7,23 +7,20 @@
     <div class="collapse navbar-collapse" id="navbarMenu">
       <ul class="navbar-nav">
       {% if user.is_authenticated %}
-      {% if user.is_superuser %} 
-      <li class="nav-item">
-        <a href="{% url 'user_list' %}" class="nav-link">
-          <i class="fas fa-users"></i> 帳號列表
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'seat_list' %}" class="nav-link">
-          <i class="fas fa-book-reader"></i> 座位列表
-        </a>
-      </li>
+
+      {% if "kteacher" in user.username %}
       <li class="nav-item">
         <a href="{% url 'log_list' %}" class="nav-link">
           <i class="fas fa-address-book"></i> 教師點名
         </a>
       </li>
-      {% else%}
+      {% elif "cteacher" in user.username %}
+      <li class="nav-item">
+        <a href="" class="nav-link">
+          <i class="fas fa-address-book"></i> 查看班級學生留校紀錄
+        </a>
+      </li>      
+      {% elif "student" in user.username %}
       <li class="nav-item">
         <a href="{% url 'seat_list' %}" class="nav-link">
           <i class="fas fa-plus "></i> 新增劃位記錄
@@ -32,6 +29,17 @@
       <li class="nav-item">
         <a href="{% url 'log_list' %}" class="nav-link">
           <i class="fas fa-wrench"></i> 修改劃位記錄
+        </a>
+      </li>
+      {% elif "scoc" in user.username %}
+      <li class="nav-item">
+        <a href="{% url 'user_list' %}" class="nav-link">
+          <i class="fas fa-users"></i> 帳號列表
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'seat_list' %}" class="nav-link">
+          <i class="fas fa-book-reader"></i> 座位列表
         </a>
       </li>
       {% endif %}
