@@ -9,4 +9,5 @@ urlpatterns = [
     path('return/', ReturnSeat.as_view(), name='return_seat'), 
     path('return/<int:lid>/', ReturnLog.as_view(), name='return_log'),
     path('<int:pk>/delete/', LogDelete.as_view(), name='log_delete'),
+    path('mylog/', LogList.as_view(), name='log_list_mine'),
 ]
