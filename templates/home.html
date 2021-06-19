@@ -3,14 +3,16 @@
 {% block content %}
 <p>歡迎光臨K中劃位系統！</p>
 
-{% if user.is_authenticated %}
-{% if user.is_superuser %} 
-<p>老師</p>
-{% else %}
-<p>學生</p>
+{% if "kteacher" in user.username %}
+<p>you are k staff</p>
+{% elif "cteacher" in user.username %}
+<p>you are classroom teacher</p>
+{% elif "student" in user.username %}
+<p>you are a student</p>
+{% elif "scoc" in user.username %}
+<p>你是教學組長</p>
 {% endif %}
 
-{% endif %}
 
 <img src="media/座位表.png" alt="" >
 
