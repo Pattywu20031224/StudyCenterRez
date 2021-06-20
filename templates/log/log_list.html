@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if "kteacher" in user.username %}
+{% elif "student" in user.username %}
+{% elif "scoc" in user.username %}
+{% else %}
 
+{% endif %}
+
+{% if "kteacher" in user.username or "student" in user.username or "scoc" in user.username %}
 <div id="log-list">
   <table class="table table-sm">
     <thead>
@@ -83,6 +90,59 @@
     </tbody>
   </table>
 </div>
+{% else %}
+
+<div id="log-list">
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th>預約日期</th>
+        <th>座位編號</th>
+        <th>預約人</th>
+        <th>登計時間</th>
+        <th>簽到時間</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ user.username}} 班留校狀況
+      {% for log in log_list %}
+      {% if user.username in log.user.last_name %}
+          <tr>
+            <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
+            <td>
+              <a href="{% url 'seat_view' log.seat.id %}">
+                {{ log.seat.SerialNumber }}
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'user_view' log.user.id %}">
+                {{ log.user.first_name }}
+              </a>
+            </td>
+            <td>{{ log.checkout|date:"Y/m/d H:i" }}</td>
+            <td>{{ log.returned|date:"Y/m/d H:i" }}</td>
+            {% if  log.returned|date:"Y/m/d H:i"  %}
+            <td><a href="" class="btn btn-sm btn-success">
+              <i class="fas fa-user-check"></i> 已簽到</a>
+            </td>
+            {% else %}
+            <td><a href="{% url 'return_log' log.id %}" class="btn btn-sm btn-danger">
+              <i class="fas fa-user-check"></i> 簽到</a>
+            </td>
+          {% endif %}
+          </tr>
+          
+            
+            {% endif %}
+      {% endfor %}
+      
+
+    </tbody>
+  </table>
+</div>
+
+{% endif %}
 {% include "pagination.html" %}
 {% endblock %}
 
