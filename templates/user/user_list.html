@@ -23,6 +23,7 @@
           </td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name }}</td>
+          
           <td>{% if user|is_teacher %}<i class="fas fa-check"></i>{% endif %}</td>
           <td>
             <a href="{% url 'user_edit' user.id %}" class="btn btn-sm btn-primary">修改</a>

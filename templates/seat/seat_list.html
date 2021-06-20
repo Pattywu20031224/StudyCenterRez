@@ -34,7 +34,7 @@
         {% else %}
         
           {% if seat.user %}
-          {{user.last_name}} {{ seat.user }}            
+          {{ seat.user }}            
           {% else %}
             <a href="{% url 'seat_reserve' seat.id %}?d={{ qdate|date:'Y-m-d' }}" class="btn btn-sm btn-primary">
               <i class="fas fa-address-seat"></i> 預約此座位

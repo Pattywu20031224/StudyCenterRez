@@ -3,7 +3,7 @@ from django.urls import reverse,reverse_lazy
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, datetime
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, UserManager
 from django.views.generic.dates import DateMixin
 from seat.models import Seat
 from .models import Log
