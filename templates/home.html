@@ -17,13 +17,13 @@
 
 {% endif %}
 {% if "kteacher" in user.username %}
-<p>you are k staff</p>
+<p>可進行教師點名</p>
 {% elif "cteacher" in user.username %}
-<p>you are classroom teacher</p>
+<p>可查看該班留校狀況</p>
 {% elif "student" in user.username %}
-<p>you are a student</p>
+<p>可新增或刪除劃位記錄</p>
 {% elif "scoc" in user.username %}
-<p>你是教學組長</p>
+<p>可管理使用者帳號、新增或刪除K中座位 </p>
 {% endif %}
 
 

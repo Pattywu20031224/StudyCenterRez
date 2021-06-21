@@ -14,7 +14,7 @@ from datetime import timedelta, datetime
 # 借閱記錄列表
 class LogList(LoginRequiredMixin, ListView):
     model = Log
-    ordering = ['seat']
+    ordering = ['-reserve_date']
     paginate_by = 20
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
