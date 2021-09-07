@@ -25,7 +25,7 @@
       
       {% for log in log_list %}
         {% if user.is_superuser %} 
-          {% if log.reserve_date == qdate %}
+          {% if True %}
           <tr>
             <td>{{ log.reserve_date|date:"Y/m/d" }}</td>
             <td>

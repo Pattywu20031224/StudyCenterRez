@@ -19,6 +19,10 @@ class LogList(LoginRequiredMixin, ListView):
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
 
+    def get_queryset(self):
+        today = timezone.localdate()
+        return Log.objects.filter(reserve_date=today)
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         delta = timedelta(days=1)
